@@ -252,8 +252,40 @@ for name, category in zip(normalized_names, normalized_categories):
     print(name, category)
 # part G
 # 1.
-# Med for loop först
 
+# Med for-loop först
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+vector = []
+for sublist in matrix:
+    for element in sublist:
+        vector.append(element)
+print(vector)
 
+# med list comprehension
+flattened = [element for sublist in matrix for element in sublist]
+print(flattened)
 # [new_list for sublist in matrix]
+
+# 2.
+
+# 3.
+students = [{"name": "Olle", "score": 70}, {"name": "Volkan", "score": 60}, {"name": "Karl", "score": 85}]
+passed = [student for student in students if student["score"] >= 70]
+print(passed)
+
+# 4.
+
+scores = [92, 20, 65, 60, 70, 90, 80]
+
+def like_any(scores, matching_score):
+    for score in scores:
+        return score == matching_score
+
+matching_score = 92
+
+print(like_any(scores, matching_score))
+print(any(element == matching_score for element in scores))
+# If condition true for one element
+treshold = 70
+print(all(element >= treshold for element in scores))
+# for all elements
