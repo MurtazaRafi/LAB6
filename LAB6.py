@@ -174,18 +174,86 @@ print(descending)
 products = [{"product" : "car", "price" : 100000}, {"product" : "bicycle", "price" : 5000}, {"product" : "motorcycle", "price" : 20000}]
 
 
-sorted = sorted(products, key = lambda product: product["price"])
-print(sorted) 
+sortedd = sorted(products, key = lambda product: product["price"])
+print(sortedd) 
 
 # 4.
+names = [{"first_name" : "Murtaza", "last_name" : "Rafi"}, {"first_name" : "Adam", "last_name" : "Karlsson"}]
+sorted_by_last_name = sorted(names, key=lambda name: name["last_name"])
+print(sorted_by_last_name)
 
 # 5. 
+people = [{"name" : "Murtaza", "age" : 65}, {"name" : "Adam", "age" : 45}]
 
+def get_person_age(person):
+    return person["age"]
 
+print(sorted(people, key=get_person_age))
+# Explananation: for each person in people - ta person["age"] och sortera baserad på den
+
+print(sorted(people, key=lambda person: person["age"]))
+
+# def 
+
+print("########## PART F ##########")
 # part F
+# 1.
+products = [
+    {"name": "   Wireless Mouse ", "category": "      Electronics", "price": 24.99, "stock": 150},
+    {"name": " headphones", "category": "electronics  ", "price": 79.99, "stock": 85},
+    {"name": "    yoga Mat ", "category": " fitness", "price": 29.99, "stock": 200},
+    {"name": "Stainless Steel Water Bottle  ", "category": " home & Kitchen", "price": 18.50, "stock": 320},
+    {"name": "Mechanical keyboard", "category": "Electronics", "price": 89.99, "stock": 60},
+    {"name": "Running Shoes ", "category": "Footwear ", "price": 64.99, "stock": 0},
+    {"name": "Ceramic coffee mug", "category": "   Home & Kitchen    ", "price": 9.99, "stock": 400},
+    {"name": "Backpack", "category": "   accessories", "price": 45.00, "stock": 0},
+    {"name": "Desk lamp", "category": "Home & Office", "price": 32.99, "stock": 140},
+    {"name": "Resistance bands Set", "category": "Fitness", "price": 15.99, "stock": 250},
+    {"name": "  notebook  ", "category": " Stationery ", "price": 12.49, "stock": 0},
+    {"name": "   power Bank", "category": " electronics    ", "price": 34.99, "stock": 175}]
+# 2.
+def normalize(name):
+    return name.strip().title()
 
+normalized_names = [normalize(product["name"]) for product in products]
+normalized_categories = [normalize(product["category"]) for product in products]
+
+# eller
+
+normalized_products = [
+    {
+        **product,  # **product tar med allt, men name och category skrivs sen över med de normaliserade värdena. Resten behålls som dom är.
+        "name" : normalize(product["name"]),
+        "category" : normalize(product["category"])
+    }
+    for product in products
+]
+# print(normalized_products)
+# 3.
+in_stock = [product for product in products if product["stock"] > 0]
+# print(in_stock)
+
+# 4.
+unique_categories = set(normalized_categories)
+# print(unique_categories)
+
+# 5.
+inventory = {product["name"] : product["price"] * product["stock"] for product in products}
+print(inventory)
+# 6.
+inventory_sorted = sorted(normalized_products, key=lambda product: product["price"] * product["stock"], reverse=True)
+print("\n")
+print(inventory_sorted)
+# 7.
+for index, product in enumerate(inventory_sorted, start=1):
+    print(index, product)
+# 8.
+for name, category in zip(normalized_names, normalized_categories):
+    print(name, category)
 # part G
 # 1.
+# Med for loop först
+
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 # [new_list for sublist in matrix]
